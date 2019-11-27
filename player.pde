@@ -5,12 +5,14 @@ public class Player {
     float sizeX;
     float sizeY;
     float moveTick = 20;
+    int score;
     public Player(int id) {
         this.id = id;
         this.posX = 10;
         this.posY = 10;
         this.sizeX = 20;
         this.sizeY = 75;
+        this.score = 0;
     }
     
     public void moveX(float amount) {
@@ -33,5 +35,9 @@ public class Player {
 
     public void draw() {
         rect(posX, posY, sizeX, sizeY);
+    }
+    
+    public void addPoint() {
+        this.score++;
     }
 }
