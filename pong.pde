@@ -3,16 +3,19 @@ public class Pong {
     int rightScore;
     Player p1;
     Player p2;
+    Ball b;
     public Pong() {
       leftScore = 0;
       rightScore = 0;
       p1 = new Player(0);
       p2 = new Player(1);
+      b = new Ball();
 
     }
     public void update() {
       p1.draw();
       p2.draw();
+      b.draw();
       drawBoundaries();
       drawScore();
     }
