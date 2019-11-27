@@ -1,10 +1,12 @@
 Pong game;
 
 void setup() {
-    size(640, 480);
+    size(800, 600);
     background(253, 102, 0);
     stroke(255);
     game = new Pong();
+    PFont scoreFont = loadFont("Dialog.bold-64.vlw");
+    textFont(scoreFont, 32);
 }
 
 void draw() {
@@ -15,4 +17,5 @@ void draw() {
 
 void keyPressed() {
     game.readKey(keyCode);
+    System.out.println(keyCode);
 }

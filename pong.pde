@@ -14,6 +14,13 @@ public class Pong {
       p1.draw();
       p2.draw();
       drawBoundaries();
+      drawScore();
+    }
+    
+    public void drawScore() {
+        textAlign(CENTER);
+        String scr = p1.score + " x " + p2.score;
+        text(scr, width/2, 0.104 * height);
     }
     
     public void drawBoundaries() {
@@ -36,6 +43,13 @@ public class Pong {
                 break;
             case 83:
                 p2.moveDown();
+                break;
+            case 37:
+                //ponto do esquerdo
+                p1.addPoint();
+                break;
+            case 39:
+                p2.addPoint();
                 break;
         }
     }
