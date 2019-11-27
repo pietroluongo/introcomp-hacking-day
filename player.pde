@@ -8,10 +8,16 @@ public class Player {
     int score;
     public Player(int id) {
         this.id = id;
-        this.posX = 10;
-        this.posY = 10;
         this.sizeX = 20;
         this.sizeY = 75;
+        if(id == 0) {
+            this.posX = 10;
+            this.posY = 10;
+        }
+        else if(id == 1) {
+            this.posX = width- (this.sizeX + 10);
+            this.posY = 10;
+        }
         this.score = 0;
     }
     

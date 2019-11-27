@@ -12,6 +12,9 @@ public class Pong {
     }
     public void update() {
       p1.draw();
+      p2.draw();
+    }
+    
     }
     public void readKey(int key) {
         System.out.println(key);
@@ -23,6 +26,12 @@ public class Pong {
             case 40:
             // down
                 p1.moveDown();
+                break;
+            case 87:
+                p2.moveUp();
+                break;
+            case 83:
+                p2.moveDown();
                 break;
         }
     }
