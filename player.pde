@@ -18,7 +18,7 @@ public class Player {
     }
     
     public void moveY(float amount) {
-        if(posY + sizeY + amount > screenSizeY || posY + amount < 0)
+        if(posY + sizeY + amount > height || posY + amount < 0)
             return;
         this.posY += amount;
         
