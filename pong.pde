@@ -47,12 +47,26 @@ public class Pong {
             case 83:
                 p2.moveDown();
                 break;
+            // DEBUG PONTUAÇÃO
             case 37:
                 //ponto do esquerdo
                 p1.addPoint();
                 break;
             case 39:
                 p2.addPoint();
+                break;
+            // DEBUG BOLA
+            case 73:
+                b.moveUp();
+                break;
+            case 74:
+                b.moveLeft();
+                break;
+            case 75:
+                b.moveDown();
+                break;
+            case 76:
+                b.moveRight();
                 break;
         }
     }
