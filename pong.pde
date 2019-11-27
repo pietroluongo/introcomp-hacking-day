@@ -13,8 +13,12 @@ public class Pong {
     public void update() {
       p1.draw();
       p2.draw();
+      drawBoundaries();
     }
     
+    public void drawBoundaries() {
+        rect(0, 0, width, 0.03*height);
+        rect(0, height-0.03*height, width, 0.03*height);
     }
     public void readKey(int key) {
         System.out.println(key);
