@@ -1,7 +1,6 @@
 public class Player {
     final int id;
-    float posX;
-    float posY;
+    PVector pos;
     float sizeX;
     float sizeY;
     float moveTick = 20;
@@ -11,24 +10,22 @@ public class Player {
         this.sizeX = width * 0.03125;
         this.sizeY = height * 0.260;
         if(id == 0) {
-            this.posX = 10;
-            this.posY = 10;
+            pos = new PVector(10, 10);
         }
         else if(id == 1) {
-            this.posX = width - (this.sizeX + 10);
-            this.posY = 10;
+            pos = new PVector(width - (sizeX + 10), 10);
         }
         this.score = 0;
     }
     
     public void moveX(float amount) {
-        this.posX += amount;
+        this.pos.x += amount;
     }
     
     public void moveY(float amount) {
-        if(posY + sizeY + amount > height || posY + amount < 0)
+        if(pos.y + sizeY + amount > height || pos.y + amount < 0)
             return;
-        this.posY += amount;
+        this.pos.y += amount;
         
     }
 
@@ -40,7 +37,7 @@ public class Player {
     }
 
     public void draw() {
-        rect(posX, posY, sizeX, sizeY);
+        rect(pos.x, pos.y, sizeX, sizeY);
     }
     
     public void addPoint() {
