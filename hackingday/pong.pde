@@ -15,6 +15,7 @@ public class Pong {
     public void update() {
       p1.draw();
       p2.draw();
+      b.tick();
       b.draw();
       drawBoundaries();
       drawScore();
