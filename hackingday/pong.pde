@@ -35,17 +35,17 @@ public class Pong {
         switch(key) {
             case 38:
             // up
-                p1.moveUp();
+                p2.moveUp();
                 break;
             case 40:
             // down
-                p1.moveDown();
+                p2.moveDown();
                 break;
             case 87:
-                p2.moveUp();
+                p1.moveUp();
                 break;
             case 83:
-                p2.moveDown();
+                p1.moveDown();
                 break;
             // DEBUG PONTUAÇÃO
             case 37:
