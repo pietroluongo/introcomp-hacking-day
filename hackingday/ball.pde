@@ -4,6 +4,7 @@ public class Ball {
     PVector vel;
     Player p1;
     Player p2;
+    boolean canMove;
 
     public Ball(Player p1, Player p2) {
         reset();
@@ -16,6 +17,11 @@ public class Ball {
         pos = new PVector(width/2, height/2);
         vel = new PVector(1, 1);
         vel.mult(3);
+        canMove = false;
+    }
+
+    public void toggleMovement() {
+        canMove = !canMove;
     }
 
     public void moveUp() {
@@ -39,14 +45,14 @@ public class Ball {
     }
     
     public void checkBounds() {
-        // Checagem de se a bola passou de uma das bordas
+        // Checagem de se a bola passou de uma das bordas - Pontuação!
         if(pos.x < (0 - radius - 10)) {
-            p2.addPoint();
+            game.notify("P2_SCORED");
             reset();
             return;
         }
         if(pos.x > (width + radius + 10)) {
-            p1.addPoint();
+            game.notify("P1_SCORED");
             reset();
             return;
         }
@@ -75,8 +81,10 @@ public class Ball {
     }
     
     public void tick() {
-        checkBounds();
-        pos.add(vel);
+        if(game.gamestate == "INGAME") {
+            checkBounds();
+            pos.add(vel);
+        }
     }
 
     public void checkPlayerCollision(Player p) {
