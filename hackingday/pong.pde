@@ -25,9 +25,16 @@ public class Pong {
         p1.draw();
         p2.draw();
         b.tick();
+        drawScore();
+        //drawMiddle();
         b.draw();
         drawBoundaries();
-        drawScore();
+    }
+
+    public void drawMiddle() {
+        for(int i = 0; i < 10; i++) {
+            rect(width/2 - 5, (0.03*height + 75) + (i * 50), 10, 35);
+        }
     }
     
     public void drawScore() {
