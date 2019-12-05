@@ -64,16 +64,11 @@ public class Ball {
         }
 
         // Checagem que rola quando a bola bate na linha de ação de um dos players
-        if(pos.x < 10 + width * 0.03125) {
-          
-          //pos.x = 10 + width * 0.03125;
-          //vel.x *= -1;
+        if(pos.x < 10 + width * 0.03125 + radius/2) {
           checkPlayerCollision(p1);
           return;
         }
-        if(pos.x > width - 10 - (width * 0.03125)) {
-            //pos.x = width - 10 - (width * 0.03125);
-            //vel.x *= -1;
+        if(pos.x > width - 10 - (width * 0.03125) - radius/2) {
             checkPlayerCollision(p2);
             return;
         }
