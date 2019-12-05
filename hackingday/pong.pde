@@ -9,7 +9,7 @@ public class Pong {
       rightScore = 0;
       p1 = new Player(0);
       p2 = new Player(1);
-      b = new Ball();
+      b = new Ball(p1, p2);
 
     }
     public void update() {
