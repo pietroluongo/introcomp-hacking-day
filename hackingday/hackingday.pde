@@ -3,7 +3,7 @@ Pong game;
 void setup() {
     size(800, 600);
     background(253, 102, 0);
-    stroke(255);
+    stroke(0);
     game = new Pong();
     PFont scoreFont = loadFont("Dialog.bold-64.vlw");
     textFont(scoreFont, 32);

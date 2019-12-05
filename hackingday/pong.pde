@@ -4,14 +4,22 @@ public class Pong {
     Player p1;
     Player p2;
     Ball b;
-    public Pong() {
-      leftScore = 0;
-      rightScore = 0;
-      p1 = new Player(0);
-      p2 = new Player(1);
-      b = new Ball(p1, p2);
 
+    public String gamestate;
+
+    public Pong() {
+        leftScore = 0;
+        rightScore = 0;
+        p1 = new Player(0);
+        p2 = new Player(1);
+        b = new Ball(p1, p2);
+        gamestate = "PREGAME";
     }
+
+    public String getGameState() {
+        return gamestate;
+    }
+
     public void update() {
       p1.draw();
       p2.draw();
@@ -34,6 +42,18 @@ public class Pong {
     public void readKey(int key) {
         System.out.println(key);
         switch(key) {
+            // Sistema de pausa
+            case 32:
+                gamestate = "INGAME";
+                break;
+            case 80:
+                if(gamestate == "PAUSED") {
+                    gamestate = "INGAME";
+                    break;
+                }
+                gamestate = "PAUSED";
+                break;
+            // Sistema de movimentação
             case 38:
             // up
                 p2.moveUp();
@@ -48,27 +68,41 @@ public class Pong {
             case 83:
                 p1.moveDown();
                 break;
-            // DEBUG PONTUAÇÃO
+            // DEBUG PONTUAÇÃO - Desativado
             case 37:
                 //ponto do esquerdo
-                p1.addPoint();
+                //p1.addPoint();
                 break;
             case 39:
-                p2.addPoint();
+                //p2.addPoint();
                 break;
-            // DEBUG BOLA
+            // DEBUG BOLA - Desativado
             case 73:
-                b.moveUp();
+                //b.moveUp();
                 break;
             case 74:
-                b.moveLeft();
+                //b.moveLeft();
                 break;
             case 75:
-                b.moveDown();
+                //b.moveDown();
                 break;
             case 76:
-                b.moveRight();
+                //b.moveRight();
                 break;
         }
     }
+
+    public void notify(String s) {
+        switch(s) {
+            case "P1_SCORED":
+                p1.addPoint();
+                gamestate = "PREGAME";
+                break;
+            case "P2_SCORED":
+                p2.addPoint();
+                gamestate = "PREGAME";
+                break;
+        }
+    }
+
 }

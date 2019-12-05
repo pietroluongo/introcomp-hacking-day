@@ -19,10 +19,14 @@ public class Player {
     }
     
     public void moveX(float amount) {
+        if(game.gamestate == "PAUSED")
+            return;
         this.pos.x += amount;
     }
     
     public void moveY(float amount) {
+        if(game.gamestate == "PAUSED")
+            return;
         if(pos.y + sizeY + amount > height || pos.y + amount < 0)
             return;
         this.pos.y += amount;
