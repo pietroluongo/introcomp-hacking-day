@@ -47,4 +47,9 @@ public class Player {
     public void addPoint() {
         this.score++;
     }
+
+    public void gogo_analog(float tgt) {
+        pos.y = map(tgt, 0, 1023, 10+sizeY/2, height-(10+sizeY/2));
+    }
+
 }

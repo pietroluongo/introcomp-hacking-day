@@ -1,9 +1,15 @@
+import processing.serial.*;
+
 public class Pong {
     int leftScore;
     int rightScore;
     Player p1;
     Player p2;
     Ball b;
+
+    boolean useAnalogControl;
+    Serial analogModePort;
+
     private PongMainMenu mainmenu;
 
     public String gamestate;
@@ -16,6 +22,19 @@ public class Pong {
         b = new Ball(p1, p2);
         mainmenu = new PongMainMenu();
         gamestate = "MAINMENU";
+        useAnalogControl = false;
+    }
+
+    public void enableAnalogControl(String serialName) {
+        useAnalogControl = true;
+        analogModePort = new Serial(null, serialName, 9600);
+        analogModePort.bufferUntil('\n');
+    }
+
+    public void enableAnalogControl(Serial s) {
+        useAnalogControl = true;
+        analogModePort = s;
+        analogModePort.bufferUntil('\n');
     }
 
     public String getGameState() {
@@ -57,9 +76,12 @@ public class Pong {
     }
 
     public void readKey(int key) {
-        //System.out.println(key);
-        if(gamestate == "INGAME" || gamestate == "PREGAME" || gamestate == "PAUSED")
-            ingameBindings(key);
+        if(gamestate == "INGAME" || gamestate == "PREGAME" || gamestate == "PAUSED") {
+            if(useAnalogControl)
+                ingameBindings_analog();
+            else
+                ingameBindings(key);
+        }
         if(gamestate == "MAINMENU")
             mainMenuBindings(key);
     }
@@ -82,11 +104,40 @@ public class Pong {
         }
     }
 
+    void serialHandler(Serial port) {
+        String s = port.readStringUntil('\n');
+        if(s != null) {
+            s = s.trim();
+            int[] pos = int(split(s, '-'));
+            p1.gogo_analog(pos[0]);
+            p2.gogo_analog(pos[1]);
+        }
+        return;
+    }
+
+
+    public void ingameBindings_analog() {
+        switch(key) {
+            case 32:
+                if(gamestate == "PREGAME")
+                    gamestate = "INGAME";
+                break;
+            case 80:
+                if(gamestate == "PAUSED") {
+                    gamestate = "INGAME";
+                    break;
+                }
+                gamestate = "PAUSED";
+                break;
+        }
+    }
+
     public void ingameBindings(int key) {
         switch(key) {
             // Sistema de pausa
             case 32:
-                gamestate = "INGAME";
+                if(gamestate == "PREGAME")
+                    gamestate = "INGAME";
                 break;
             case 80:
                 if(gamestate == "PAUSED") {
