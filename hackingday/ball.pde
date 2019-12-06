@@ -92,6 +92,7 @@ public class Ball {
     public void checkPlayerCollision(Player p) {
         if(pos.y > p.pos.y && pos.y < p.pos.y + p.sizeY) {
             vel.x *= -1;
+            this.vel.mult(1.1);
         }
     }
   
