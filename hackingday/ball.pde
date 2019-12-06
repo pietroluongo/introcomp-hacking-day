@@ -41,7 +41,9 @@ public class Ball {
     }
     
     public void draw() {
+        //fill(0, 101, 255);
         circle(pos.x, pos.y, 25);
+        fill(255);
     }
     
     public void checkBounds() {

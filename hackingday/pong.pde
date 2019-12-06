@@ -47,8 +47,20 @@ public class Pong {
         rect(0, 0, width, 0.03*height);
         rect(0, height-0.03*height, width, 0.03*height);
     }
+
     public void readKey(int key) {
         System.out.println(key);
+        if(gamestate == "INGAME" || gamestate == "PREGAME" || gamestate == "PAUSED")
+            ingameBindings(key);
+        if(gamestate == "MAINMENU")
+            mainMenuBindings();
+    }
+
+    public void mainMenuBindings() {
+
+    }
+
+    public void ingameBindings(int key) {
         switch(key) {
             // Sistema de pausa
             case 32:

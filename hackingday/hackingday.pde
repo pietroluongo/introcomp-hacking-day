@@ -17,5 +17,5 @@ void draw() {
 
 void keyPressed() {
     game.readKey(keyCode);
-    System.out.println(keyCode);
+    //System.out.println(keyCode);
 }
