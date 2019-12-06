@@ -49,7 +49,7 @@ public class Player {
     }
 
     public void gogo_analog(float tgt) {
-        pos.y = map(tgt, 0, 1023, 10+sizeY/2, height-(10+sizeY/2));
+        pos.y = map(tgt, 0, 1023, 0.03 * height, height - 0.03*height - sizeY);
     }
 
 }
