@@ -2,7 +2,7 @@ Pong game;
 
 void setup() {
     size(800, 600);
-    background(253, 102, 0);
+    background(0);
     stroke(0);
     game = new Pong();
     PFont scoreFont = loadFont("Dialog.bold-64.vlw");
@@ -10,8 +10,7 @@ void setup() {
 }
 
 void draw() {
-    background(0,0,0);
-    background(253, 102, 0);
+    background(0);
     game.update();
 }
 

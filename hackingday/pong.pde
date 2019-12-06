@@ -4,6 +4,7 @@ public class Pong {
     Player p1;
     Player p2;
     Ball b;
+    private PongMainMenu mainmenu;
 
     public String gamestate;
 
@@ -13,7 +14,8 @@ public class Pong {
         p1 = new Player(0);
         p2 = new Player(1);
         b = new Ball(p1, p2);
-        gamestate = "PREGAME";
+        mainmenu = new PongMainMenu();
+        gamestate = "MAINMENU";
     }
 
     public String getGameState() {
@@ -21,14 +23,20 @@ public class Pong {
     }
 
     public void update() {
-        fill(255);
-        p1.draw();
-        p2.draw();
-        b.tick();
-        drawScore();
-        //drawMiddle();
-        b.draw();
-        drawBoundaries();
+        if(gamestate == "MAINMENU") {
+            mainmenu.draw();
+        }
+        else if (gamestate == "PAUSED" || gamestate == "PREGAME" || gamestate == "INGAME") {
+            background(253, 102, 0);
+            fill(255);
+            p1.draw();
+            p2.draw();
+            b.tick();
+            drawScore();
+            //drawMiddle();
+            b.draw();
+            drawBoundaries();
+        } 
     }
 
     public void drawMiddle() {
@@ -49,15 +57,29 @@ public class Pong {
     }
 
     public void readKey(int key) {
-        System.out.println(key);
+        //System.out.println(key);
         if(gamestate == "INGAME" || gamestate == "PREGAME" || gamestate == "PAUSED")
             ingameBindings(key);
         if(gamestate == "MAINMENU")
-            mainMenuBindings();
+            mainMenuBindings(key);
     }
 
-    public void mainMenuBindings() {
-
+    public void mainMenuBindings(int key) {
+        switch(key) {
+            case 39:
+                print("right");
+                mainmenu.move_right();
+                break;
+            case 37:
+                print("left");
+                mainmenu.move_left();
+                break;
+            case 10:
+                mainmenu.select();
+                break;
+            default:
+                print("EO");
+        }
     }
 
     public void ingameBindings(int key) {
@@ -120,6 +142,9 @@ public class Pong {
                 break;
             case "P2_SCORED":
                 p2.addPoint();
+                gamestate = "PREGAME";
+                break;
+            case "START_GAME":
                 gamestate = "PREGAME";
                 break;
         }
